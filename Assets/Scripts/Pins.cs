@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Pins : MonoBehaviour {
-
+	public float distToRaise = 40f;
 	public float standingThreshold = 3f;
 
-	// Use this for initialization
+	private Rigidbody rigidBody;
+
 	void Start () {
-		
+		rigidBody = GetComponent<Rigidbody> ();
 	}
-	
-	// Update is called once per frame
+
 	void Update () {
-		IsStanding ();
+//		IsStanding ();
 	}
 
 	public bool IsStanding() {
@@ -26,5 +26,17 @@ public class Pins : MonoBehaviour {
 		} else {
 			return false;
 		}
+	}
+
+	public void RaiseIfStanding () {
+		rigidBody.useGravity = false;
+		if (IsStanding ()) {
+			transform.Translate (new Vector3 (0, distToRaise, 0), Space.World);
+		}
+	}
+
+	public void Lower () {
+		transform.Translate (new Vector3 (0, -distToRaise, 0), Space.World);
+		rigidBody.useGravity = true;
 	}
 }
