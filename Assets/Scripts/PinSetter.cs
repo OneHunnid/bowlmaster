@@ -4,9 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class PinSetter : MonoBehaviour {
-	public Text standingDisplay;
 	public int lastStandingCount = -1;
-	public float distanceToRaise = 40f;
+	public Text standingDisplay;
 	public GameObject pinSet;
 
 	private bool ballEnteredBox = false;
@@ -21,7 +20,7 @@ public class PinSetter : MonoBehaviour {
 		standingDisplay.text = CountStanding ().ToString ();
 
 		if (ballEnteredBox) {
-			CheckStanding ();
+			UpdateStandingCountAndSettle ();
 		}
 	}
 
@@ -42,7 +41,7 @@ public class PinSetter : MonoBehaviour {
 		newPins.transform.position += new Vector3 (0, 20, 0);
 	}
 
-	void CheckStanding () {
+	void UpdateStandingCountAndSettle () {
 		int currentStanding = CountStanding ();
 
 		if (currentStanding != lastStandingCount) {
@@ -76,13 +75,7 @@ public class PinSetter : MonoBehaviour {
 		return standing;
 	}
 
-	void OnTriggerExit (Collider collider){
-		GameObject thingLeft = collider.gameObject;
 
-		if (thingLeft.GetComponent<Pins> ()) {
-			Destroy (thingLeft);
-		}
-	}
 
 	void OnTriggerEnter(Collider collider) {
 		GameObject thingHit = collider.gameObject;

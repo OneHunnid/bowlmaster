@@ -12,10 +12,6 @@ public class Pins : MonoBehaviour {
 		rigidBody = GetComponent<Rigidbody> ();
 	}
 
-	void Update () {
-//		IsStanding ();
-	}
-
 	public bool IsStanding() {
 		Vector3 rotationInEuler = transform.rotation.eulerAngles;
 		float tiltInX = Mathf.Abs(270 - rotationInEuler.x);
